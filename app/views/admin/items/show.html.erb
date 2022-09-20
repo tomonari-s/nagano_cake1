@@ -1,0 +1,15 @@
+<h3>商品詳細</h3>
+
+
+<div>
+  <%= image_tag @item.image, size: "300x300" %>
+  <p>商品名：<%= @item.name %></p>
+  <p>説明：<%= @item.introduction %></p>
+  <p>ジャンル：<%= @item.genre.name %></p>
+  <p>税込価格(税抜価格)：<%= @item.price %></p>
+  <% if @item.is_active %>
+  <p>販売ステータス：販売中</p>
+  <% else %>
+  <p>販売ステータス：販売停止中</p>
+  <% end %>
+</div>

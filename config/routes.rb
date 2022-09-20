@@ -12,10 +12,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-namespace :admin do
-    root "homes#top"
-    # get "/" => "homes#top"
-  end
   
   namespace :admin do
     resources :order_orders, only: [:update]
@@ -23,6 +19,8 @@ namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    root "homes#top"
+    post 'genres/create'
   end
   
   namespace :public do
