@@ -1,0 +1,44 @@
+<h3 class="text-center">商品編集</h3>
+<!--"position-relative end-50"-->
+
+<div class="container", align="center", :class="lh-lg">
+    <table style="border:none;", :class="table" >
+    <thead>
+
+
+      <%= form_with model: @item, url: edit_admin_item_path(@item.id) do |f| %>
+        <tr>
+          <th>商品画像</th>
+          <td><%= f.file_field :image, accept: "image/*" %></td>
+        </tr>
+        <tr class="field">
+          <th valign="middle"><%= f.label :"商品名" %></th>
+          <td><%= f.text_field :name, :size=>"60", autofocus: true %></td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label :"商品説明" %></th>
+          <td><%= f.text_field :introduction, :size=>"60x300", autofocus: true %></td>
+        </tr>
+        <tr class="form-group">
+          <th><%= f.label  'ジャンル' %></th>
+          <td><%= f.collection_select :genre_id, Genre.all, :id,:name %></td>
+        </tr>
+        <tr class="field">
+          <th valign="middle"><%= f.label :"税抜価格" %></th>
+          <td><%= f.text_field :price, autofocus: true %>円</td>
+        </tr>
+        <tr class="field">
+          <th><%= f.label :"販売ステータス" %></th>
+          <td><%= f.radio_button :is_active, "TRUE", {:checked => true}  %>
+              <%= f.label :is_active, "販売中" %>
+          <%= f.radio_button :is_active, "FALSE" %>
+          <%= f.label :is_active, "販売停止中" %></td>
+        </tr>
+        <tr>
+          <th class="actions"><%= f.submit "変更を保存", :class =>'btn btn-success' %></th>
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

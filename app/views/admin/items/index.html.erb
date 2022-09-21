@@ -2,6 +2,7 @@
     </div>  
         <div class="col-md-10 offset-md-1">
               <h2>商品一覧</h2>
+              <button type="button", href = "admin/items/new", class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;">＋</button>
             <table class="table table-hover table-inverse">
                 <thead>
                   <tr>
@@ -14,15 +15,21 @@
                   </tr>
                 </thead>
               <tbody>  
-              <%# @books.each do |book| %>
+              <% @items.each do |item| %>
               
-                <!--<tr>-->
-                    <td><%#= link_to user_path(book.user.id) do %><%#= image_tag book.user.get_profile_image(100,100) %><%# end %></td>
-                    <th><%#= link_to book.title, book_path(book.id) %></th>
-                    <th><%#= book.body %></th>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= link_to item.name, admin_item_path(item) %></td>
+                    <td><%= item.price  %></td>
+                    <td><%= item.genre.name %></td>
+                    <td><% if item.is_active %>
+                        <p>販売ステータス：販売中</p>
+                        <% else %>
+                        <p>販売ステータス：販売停止中</p>
+                        <% end %></td>
                 </tr>
                
-              <%# end %>  
+              <% end %>  
               </tbody> 
             </table>
         </div>

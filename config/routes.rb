@@ -21,6 +21,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     root "homes#top"
     post 'genres/create'
+    patch 'items/:id' => 'items#update', as: 'update_item'
   end
   
   namespace :public do
