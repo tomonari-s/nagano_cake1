@@ -13,9 +13,11 @@ class ApplicationController < ActionController::Base
     case resource
     when :admin   # ログアウト時はシンボルが返ってくる
       new_admin_session_path
-    when :end_user  # ログアウト時はシンボルが返ってくる
+    when :Public  # ログアウト時はシンボルが返ってくる
       public_root_path
     end
-  end  
+  end 
+  
+  
   
 end
