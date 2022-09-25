@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
    case resource
    when Admin
      admin_root_path
-   when Public
+   when Customer
      public_root_path
    end
   end
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     case resource
     when :admin   # ログアウト時はシンボルが返ってくる
       new_admin_session_path
-    when :Public  # ログアウト時はシンボルが返ってくる
+    when :customer  # ログアウト時はシンボルが返ってくる
       public_root_path
     end
   end 
