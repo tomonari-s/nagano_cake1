@@ -1,0 +1,16 @@
+<p>show</p>
+
+<div>
+  <%= image_tag @item.image, size: "300x300" %>
+  <p><%= @item.name %></p>
+  <p><%= @item.introduction %></p>
+  <p> <%= @item.with_tax_price %> (税込)</p>
+  
+  <%#= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-sm btn-success" %>
+  <%= form_with model: @item, url: public_cart_items_path do |f| %>
+    <%= f.select :amount, *[1..10] %>
+    <%= f.hidden_field :item_id, :value => "@item" %>
+    <%= f.submit "カートに入れる", :class =>'btn btn-success' %>
+    
+  <% end %>
+</div>

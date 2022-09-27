@@ -1,10 +1,11 @@
 <h2>会員情報編集</h2>
 
 <div class="container", align="center", :class="lh-lg">
+  <%= form_with model: @customer, url: public_customer_path(@customer.id) do |f| %>
     <table style="border:none;", :class="table" >
 
 
-      <%= form_with model: @customer, url: public_customer_path(@customer.id) do |f| %>
+      
         
         <tr class="field">
           <td valign="middle"><%= f.label :"氏名" %></th>
@@ -35,8 +36,10 @@
         <tr>
           <th class="actions"><%= f.submit "編集内容を保存", :class =>'btn btn-success' %></th>
           <th></th>
-          <th class="actions"><%= link_to "退会する", public_withdrawal_path, method: :patch, data: { confilm: "本当に退会しますか？" } %></th>
+          <th class="actions"><%= link_to "退会する", public_unsubscribe_path %></th>
+          <!--, method: :patch, data: { confilm: "本当に退会しますか？" }-->
         </tr>
-      <% end %>
+      
   </table>
+  <% end %>
 </div>

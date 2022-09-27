@@ -1,0 +1,22 @@
+<div class="container px-5 px-sm-0">
+    </div>  
+        <div class="col-md-10 offset-md-1">
+              <h2>商品一覧</h2>
+             
+           
+               
+              <% @items.each do |item| %>
+              
+                    <%= image_tag item.image, size: "300x300" %>
+                    <%= link_to item.name,  public_item_path(item) %>
+                    <%= item.price  %>
+                    <%= item.genre.name %>
+                
+               
+              <% end %>  
+              
+        </div>
+          
+        
+      </div>
+    </div>

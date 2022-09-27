@@ -31,7 +31,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :customers, only: [:show, :edit, :update]
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
-    root to: 'homes#top'
+    root 'homes#top'
     get "/about" => "homes#about", as: "about"
     # 退会確認画面
     get '/customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
