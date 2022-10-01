@@ -1,46 +1,50 @@
-<h3 class="text-center">商品編集</h3>
-<!--"position-relative end-50"-->
+<p></p>
 
-<div class="container", align="center", :class="lh-lg">
-  <%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
+<div class="container">
+  <div class ="col-md-3">
+    <h3 class ="bg-light", align="center">商品編集</h3>
+  </div>
+
+  <div class ="row">
+    <div class ="mx-auto">
+    <%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
     <table style="border:none;", :class="table" >
-    <thead>
-
-
-      
-        <tr>
-          <th>商品画像</th>
-          <td><%= f.file_field :image, accept: "image/*" %></td>
-        </tr>
-        <tr class="field">
-          <th valign="middle"><%= f.label :"商品名" %></th>
-          <td><%= f.text_field :name, :size=>"60", autofocus: true %></td>
-        </tr>
-        <tr class="field">
-          <th><%= f.label :"商品説明" %></th>
-          <td><%= f.text_field :introduction, :size=>"60x300", autofocus: true %></td>
-        </tr>
-        <tr class="form-group">
-          <th><%= f.label  'ジャンル' %></th>
-          <td><%= f.collection_select :genre_id, Genre.all, :id,:name %></td>
-        </tr>
-        <tr class="field">
-          <th valign="middle"><%= f.label :"税抜価格" %></th>
-          <td><%= f.text_field :price, autofocus: true %>円</td>
-        </tr>
-        <tr class="field">
-          <th><%= f.label :"販売ステータス" %></th>
-          <td><%= f.radio_button :is_active, "TRUE", {:checked => true}  %>
-              <%= f.label :is_active, "販売中" %>
-          <%= f.radio_button :is_active, "FALSE" %>
-          <%= f.label :is_active, "販売停止中" %></td>
-        </tr>
-        <tr>
-          <th class="actions"><%= f.submit "変更を保存", :class =>'btn btn-success' %></th>
+    <tbody>
+      <tr>
+        <td width="130" height="40">商品画像</td>
+        <td><%= f.file_field :image, accept: "image/*" %></td>
+      </tr>
+      <tr class="field">
+        <td valign="middle"  height="40"><%= f.label :"商品名" %></thd>
+        <td><%= f.text_field :name, autocomplete: "name",size:"35" %></td>
+      </tr>
+      <tr class="field">
+        <td height="40"><%= f.label :"商品説明" %></td>
+        <td><%= f.text_area :introduction, autocomplete: "introduction", size:"37x6" %></td>
+      </tr>
+      <tr class="form-group">
+        <td height="40"><%= f.label  'ジャンル' %></td>
+        <td><%= f.collection_select :genre_id, Genre.all, :id,:name, {include_blank:"--選択してください--"}, style:"width:300px;" %></td>
+      </tr>
+      <tr class="field">
+        <td valign="middle" height="50"><%= f.label :"税抜価格" %></td>
+        <td><%= f.text_field :price, autocomplete: "price", size:"35" %>円</td>
+      </tr>
+      <tr class="field">
+        <td height="50"><%= f.label :"販売ステータス  " %></td>
+        <td><%= f.radio_button :is_active, "TRUE", {:checked => true}  %>
+            <%= f.label :is_active, "販売中" %>
+            <%= f.radio_button :is_active, "FALSE" %>
+            <%= f.label :is_active, "販売停止中" %></td>
+      </tr>
+      <tr>
+        <td colspan="2", class ="text-center"><%= f.submit "変更を保存", :class =>'btn btn-success btn-lg' %></th>
           
-        </tr>
+      </tr>
       
     </tbody>
-  </table>
-  <% end %>
-</div>
+    </table>
+    <% end %>
+  </div>
+  </div>
+</div>  

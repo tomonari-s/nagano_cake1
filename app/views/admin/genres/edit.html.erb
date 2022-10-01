@@ -1,7 +1,17 @@
-<h2>ジャンル編集</h2>
+<p></p>
 
-<%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch  do |f| %>
-<p>ジャンル名</p>
-<%= f.text_field :name, autofocus: true, id:"genre_name" %>
-<%= f.submit "変更を保存", class:"btn btn-sm btn-success" %>
-<% end %>
+<div class="container">
+  <div class ="col-md-3">
+    <h4 class ="bg-light", align="center">ジャンル編集</h4>
+  </div>
+  
+    <div class ="col-md-8">
+      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch  do |f| %>
+        <%= f.label :ジャンル名, class:"mr-5 mt-5 mb-5" %>
+        <%= f.text_field :name,autocomplete: "name", class:"mr-5"  %>
+        <%= f.submit "変更を保存", class:"btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+    
