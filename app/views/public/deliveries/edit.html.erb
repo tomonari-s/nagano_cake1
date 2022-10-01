@@ -1,0 +1,21 @@
+<h2>配送先編集</h2>
+
+<%= form_with model: @delivery, url: public_delivery_path(@delivery) do |f| %>
+<table>
+  <tr>
+    <td>郵便番号(ハイフンなし)</td>
+    <td><%= f.text_field :postal_code %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>住所</td>
+    <td><%= f.text_field :address, autofocus: true %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>宛名</td>
+    <td><%= f.text_field :name, autofocus: true %></td>
+    <td><%= f.submit "変更内容保存", :class =>'btn btn-success' %></td>
+  </tr>
+</table>
+<% end %>

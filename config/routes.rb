@@ -26,8 +26,14 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   
   namespace :public do
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
-    resources :orders, only: [:comfirm, :complete, :create, :index, :show]
-    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
+    resources :orders, only: [:new, :create, :index, :show]
+    get '/orders/:id/complete' => 'orders#complete', as: 'complete'
+    post '/orders/:id/comfirm' => 'orders#comfirm', as: 'comfirm'
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+      collection do
+        delete 'destroy_all'
+      end
+    end
     resources :customers, only: [:show, :edit, :update]
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
@@ -37,6 +43,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get '/customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     # 論理削除用のルーティング
     patch '/customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
+    
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,0 +1,38 @@
+<h2>注文情報入力</h2>
+<h3>支払方法</h3>
+<%= form_with model: @order, url: public_orders_path do |f| %>
+  <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+  <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+
+  <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+  <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%>
+
+<h3>お届け先</h3>
+  <p><%= f.label :"ご自身の住所" %></p>
+      <div class="radio">
+			<label>
+				<%= f.radio_button :address_number,1,checked: "checked" %>ご自身の住所:
+				<span>〒<%= current_customer.postal_code %> <%= current_customer.address %> <%= current_customer.last_name %><%= current_customer.first_name %></span>
+			</label>
+			
+			<div>
+          <label style="margin-left: 60px;"><%= f.radio_button :address_number ,2%> 登録済住所からの選択</label><br>
+		      <%= f.select :delivery_id, options_from_collection_for_select(Delivery.all, :id, :delivery_display) %>
+		  </div>
+		  
+		   <label style="margin-left: 60px;"><%= f.radio_button :address_number,3 %> 新しいお届け先</label><br>
+        <div style="display: flex; margin-left:15% ;">
+          <div  style="display: flex flex-direction: column;  flex-wrap: wrap;  width: 60px;">
+            <%= f.label :"郵便番号"%><br><br>
+            <%= f.label :"住    所"%><br><br>
+            <%= f.label :"宛    名"%><br><br>
+          </div>
+          <div style=" margin-left:20px; ">
+            <%= f.text_field :postal_code  %><br><br>
+            <%= f.text_field :shipping_address ,size: "60" %><br><br>
+            <%= f.text_field :name %><br><br>
+           <%= f.submit "確認画面に進む", :class =>"btn btn-primary text-cenrer" %>
+          </div>
+          <% end %>
+        </div>
+  

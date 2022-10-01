@@ -1,19 +1,15 @@
 <h2>配送先登録/一覧</h2>
 
 <div class="container", align="center", :class="lh-lg">
-  <%#= form_with model: @deliveries, url: public_delivery_path(@delivery.id) do |f| %>
-  <%= form_with model: @gdelivery, url: public_deliveries_path do |f| %>
-  郵便番号<%= f.text_field :postal_code %>
-  住所<%= f.text_field :address, autofocus: true %>
-  宛名<%= f.text_field :name, autofocus: true %>
-  <%= f.submit "新規登録", :class =>'btn btn-success' %>
-<% end %>
+  <%= form_with model: @delivery, url: public_deliveries_path do |f| %>
+    郵便番号<%= f.text_field :postal_code %>
+    住所<%= f.text_field :address, autofocus: true %>
+    宛名<%= f.text_field :name, autofocus: true %>
+    <%= f.submit "新規登録", :class =>'btn btn-success' %>
+  <% end %>
   
   
   
-  
-  <%# end %>
-    
 
 
       
@@ -24,18 +20,22 @@
           <th>宛名</th>
           <th></th>
         </tr>
-        <% @deliveries.each do |delivery| %>
+      <% @deliveries.each do |delivery| %> 
         <tr class="field">
           <td><%= delivery.postal_code   %></th>
           <td><%= delivery.address %></td>
           <td><%= delivery.name  %></td>
-          <td class="actions"><%= f.submit "編集内容を保存", :class =>'btn btn-success' %>
-              <%= f.submit "編集内容を保存", :class =>'btn btn-success' %></td>
+          <td class="actions">
+            <%#= f.submit "編集内容を保存", :class =>'btn btn-success' %>
+            <%= link_to "編集する", edit_public_delivery_path(delivery), class:"btn btn-sm btn-success" %>
+            <%#= f.submit "編集内容を保存", :class =>'btn btn-success' %>
+            <%= link_to "削除する", public_delivery_path(delivery), method: :delete, class:"btn btn-sm btn-success" %>
+          </td>
         </tr>
         
-      
+      <% end %>
                     
       
   </table>
-  <% end %>
+  
 </div>
