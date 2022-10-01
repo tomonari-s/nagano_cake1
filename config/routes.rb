@@ -35,6 +35,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       end
     end
     resources :customers, only: [:show, :edit, :update]
+    get "/customers/my_page" => "customers#show"
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
     root 'homes#top'

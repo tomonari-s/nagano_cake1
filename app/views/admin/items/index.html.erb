@@ -1,39 +1,48 @@
-<div class="container px-5 px-sm-0">
-    </div>  
-        <div class="col-md-10 offset-md-1">
-              <h2>商品一覧</h2>
-              <button type="button", href = "admin/items/new", class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;">＋</button>
-            <table class="table table-hover table-inverse">
-                <thead>
-                  <tr>
-                    <th>商品ID</th>
-                    <th colspan="3">商品名</th>
-                    <th>税抜価格</th>
-                    <th>ジャンル</th>
-                    <th colspan="2"></th>
-                    <th>ステータス</th>
-                  </tr>
-                </thead>
-              <tbody>  
-              <% @items.each do |item| %>
-              
-                <tr>
-                    <td><%= item.id %></td>
-                    <td><%= link_to item.name, admin_item_path(item) %></td>
-                    <td><%= item.price  %></td>
-                    <td><%= item.genre.name %></td>
-                    <td><% if item.is_active %>
-                        <p>販売ステータス：販売中</p>
-                        <% else %>
-                        <p>販売ステータス：販売停止中</p>
-                        <% end %></td>
-                </tr>
-               
-              <% end %>  
-              </tbody> 
-            </table>
-        </div>
-          
-        
-      </div>
-    </div>
+<p></p>
+
+<div class="container">
+  <div class ="col-md-3">
+    <h4 class ="bg-light", align="center">商品一覧</h4>
+  </div>
+  
+  <h3 class="text-right">
+    <%= link_to new_admin_item_path do %>
+    <span class ="text-body shadow-sm rounded-circle">＋</span>
+    <% end %>
+  </h3>
+  
+  <div class ="row">         
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+          <th>ジャンル</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>  
+        <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td>
+            <%= link_to admin_item_path(item) do %>
+            <span class ="text-body border-bottom border-dark"><%= item.name %></span>
+            <% end %>
+          </td>
+          <td><%= item.price  %></td>
+          <td><%= item.genre.name %></td>
+          <td><% if item.is_active %>
+            <span class ="text-success font-weight-bold">販売中</span>
+            <% else %>
+            <span class ="text-secondary font-weight-bold">販売停止中</span>
+            <% end %>
+          </td>
+        </tr>
+       <% end %>  
+      </tbody> 
+    </table>
+  </div>
+  <div class=" col-md-12 d-flex justify-content-center"><%= paginate @items %></div>
+</div>
