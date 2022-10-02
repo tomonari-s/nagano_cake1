@@ -1,0 +1,72 @@
+<p></p>
+
+<div class="container">
+  <div class ="col-md-3">
+    <h3 class ="bg-light", align="center">注文情報確認</h3>
+  </div>
+  
+    <div class="d-flex justify-content-between">
+      <div class ="col-md-8 mt-3">
+      <table class="table table-bordered ml-5">
+        <tbody>
+          <tr class="table-light">
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+        <tr>
+        <% @cart_items.each do |cart_item| %>
+        <% @total = 0 %>
+        <tr>
+          <th><p><%= image_tag cart_item.item.image, size: "60x30" %> <%= cart_item.item.name %></p></th>
+          <td><%= cart_item.item.with_tax_price %></td>
+          <td><%= cart_item.amount %></td>
+          <td><%= cart_item.item.with_tax_price * cart_item.amount %></td>
+        </tr>
+        </tbody>
+        <% @total += cart_item.item.with_tax_price * cart_item.amount %>
+        <% end %>
+      </table>
+      </div>
+
+      <div class ="col-md-4 ml-5 mt-3">
+      <table class ="table table-bordered">
+        <tbody>
+          <tr>
+            <th class ="table-light">送料</th>
+            <td><%= @order.delivery_charge %></td>
+          </tr>
+          <tr>
+            <th class ="table-light">商品合計</th>
+            <td><%= @total %></td>
+          </tr>
+          <tr>
+            <th class ="table-light">請求金額</th>
+            <td><%= @order.delivery_charge + @total %></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  <%= form_with model: @order, url: public_orders_path do |f| %>
+  <div class ="row ml-5">
+    <div class ="col-md-4">
+      <p class="mt-5"><span class ="font-weight-bold h5 mr-3">支払方法</span><%= @order.payment_method_i18n %></p>
+      <p class="mt-5"><span class ="font-weight-bold h5 mr-3">お届け先</span><%= @order.delivery_address_postal_code %> <%= @order.delivery_address %></p>
+      <p class="mt-0"><%= @order.delivery_address_name %></p>
+    </div>
+  </div>
+  <%= f.hidden_field :delivery_address_name, :value => @order.delivery_address_name %>
+  <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+  <%= f.hidden_field :delivery_address_postal_code, :value => @order.delivery_address_postal_code %>
+  <%= f.hidden_field :delivery_address, :value => @order.delivery_address %>
+  <%= f.hidden_field :delivery_charge, :value => @order.delivery_charge %>
+  <%= f.hidden_field :billing_amount, :value => @order.delivery_charge + @total %>
+  <%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <%= f.hidden_field :status, :value => Order.statuses.key(0) %>
+  <div class ="d-flex justify-content-center align-items-center">
+    <%= f.submit '注文を確定する', class:"btn btn-success btn-lg" %>
+  </div>
+  <% end %>
+</div>

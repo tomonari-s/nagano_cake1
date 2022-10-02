@@ -24,11 +24,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     patch 'items/:id' => 'items#update', as: 'update_item'
   end
   
-  namespace :public do
+  scope module:  :public, shallow: true do
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
+    get '/orders/complete' => 'orders#complete', as: 'complete'
+    post '/orders/comfirm' => 'orders#comfirm', as: 'comfirm'
     resources :orders, only: [:new, :create, :index, :show]
-    get '/orders/:id/complete' => 'orders#complete', as: 'complete'
-    post '/orders/:id/comfirm' => 'orders#comfirm', as: 'comfirm'
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete 'destroy_all'
@@ -38,7 +38,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get "/customers/my_page" => "customers#show"
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
-    root 'homes#top'
+    root to: 'homes#top'
     get "/about" => "homes#about", as: "about"
     # 退会確認画面
     get '/customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'

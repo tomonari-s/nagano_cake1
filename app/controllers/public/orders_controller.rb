@@ -8,6 +8,9 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = CartItem.all
     @delivery = Delivery.find(params[:order][:delivery_id])
+    @order.delivery_charge = 800
+    @order.billing_amount = @total.to_i + @order.delivery_charge
+    
     
     if params[:order][:select_address] == "0"
         @order.delivery_address_postal_code = current_customer.postal_code
@@ -34,7 +37,7 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.save
     current_customer.cart_items.destroy_all
-    redirect_to public_comfirm_path(@order.id)
+    redirect_to public_complete_path
   end
 
   def index
@@ -45,7 +48,7 @@ class Public::OrdersController < ApplicationController
   
   private
   def order_params
-    params.require(:order).permit(:customer_id, :payment_method, :delivery_address_postal_code, :delivery_address, :delivery_address_name, :billing_amount, :order_status)
+    params.require(:order).permit(:customer_id, :payment_method, :delivery_address_postal_code, :delivery_address, :delivery_address_name, :billing_amount, :status, :delivery_charge)
   end
   
   def cart_item_params
