@@ -15,13 +15,13 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <% if customer_signed_in? %>
-        <%= link_to public_root_path, class:"navbar-brand" do %>
+        <%= link_to root_path, class:"navbar-brand" do %>
           <h2>NaganoCake</h2>
         <% end %>  
       <% elsif admin_signed_in? %>
           <h2>NaganoCake</h2>
       <% else %>
-        <%= link_to public_root_path, class:"navbar-brand" do %>
+        <%= link_to root_path, class:"navbar-brand" do %>
           <h2>NaganoCake</h2>
         <% end %>
       <% end %>    
@@ -41,11 +41,11 @@
           </li>
           
           <li class="mr-5">
-            <%= link_to public_items_path , class:"btn btn-outline-secondary text-dark" do %>商品一覧
+            <%= link_to items_path , class:"btn btn-outline-secondary text-dark" do %>商品一覧
             <% end %>
           </li>
           <li class="mr-5">
-            <%= link_to public_cart_items_path , class:"btn btn-outline-secondary text-dark" do %>カート
+            <%= link_to cart_items_path , class:"btn btn-outline-secondary text-dark" do %>カート
             <% end %>
           </li>
           <li class="mr-5">
@@ -80,11 +80,11 @@
           
           <% else %>
           <li class="mr-5">
-            <%= link_to public_about_path, class:"btn btn-outline-secondary text-dark" do %>adout
+            <%= link_to about_path, class:"btn btn-outline-secondary text-dark" do %>adout
             <% end %>
           </li>
           <li class="mr-5">
-            <%= link_to public_items_path, class:"btn btn-outline-secondary text-dark"  do %>商品一覧
+            <%= link_to items_path, class:"btn btn-outline-secondary text-dark"  do %>商品一覧
             <% end %>      
           </li>
           <li class="mr-5">

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
    when Admin
      admin_root_path
    when Customer
-     public_root_path
+     root_path
    end
   end
 
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     when :admin   # ログアウト時はシンボルが返ってくる
       new_admin_session_path
     when :customer  # ログアウト時はシンボルが返ってくる
-      public_root_path
+      root_path
     end
   end 
   

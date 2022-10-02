@@ -34,7 +34,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
         delete 'destroy_all'
       end
     end
-    resources :customers, only: [:show, :edit, :update]
+    resources :customers, only: [:edit, :update]
     get "/customers/my_page" => "customers#show"
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
