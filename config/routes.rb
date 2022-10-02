@@ -34,16 +34,17 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
         delete 'destroy_all'
       end
     end
-    resources :customers, only: [:edit, :update]
     get "/customers/my_page" => "customers#show"
+    get "/customers/information/edit" => "customers#edit"
+    patch "/customers/information" => "customers#update"
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
     root to: 'homes#top'
     get "/about" => "homes#about", as: "about"
     # 退会確認画面
-    get '/customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+    get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     # 論理削除用のルーティング
-    patch '/customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
+    patch '/customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
     
   end
   

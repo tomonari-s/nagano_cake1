@@ -1,41 +1,52 @@
-<h2>配送先登録/一覧</h2>
+<p></p>
 
-<div class="container", align="center", :class="lh-lg">
-  <%= form_with model: @delivery, url: public_deliveries_path do |f| %>
-    郵便番号<%= f.text_field :postal_code %>
-    住所<%= f.text_field :address, autofocus: true %>
-    宛名<%= f.text_field :name, autofocus: true %>
-    <%= f.submit "新規登録", :class =>'btn btn-success' %>
-  <% end %>
-  
-  
-  
+<div class="container">
+  <div class ="col-md-3">
+    <h3 class ="bg-light", align="center">配送先登録/一覧</h3>
+  </div>
 
+  <div class ="row">
+    <div class ="col-md-12">
+      <%= form_with model: @delivery, url: deliveries_path, method: :post do |f| %>
+      <table class ="table table-borderless">
+        <tr>
+          <th>郵便番号（ハイフンなし）</th>
+          <td><%= f.text_field:postal_code, placeholder:"0000000" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= f.text_field:address,placeholder:"東京都渋谷区代々木神園0-0", size:"60" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>宛名</th>
+          <td><%= f.text_field:name, placeholder:"令和道子" %></td>
+          <td><%= f.submit '新規登録',class:"btn btn-success mr-5" %></td>
+          <td></td>
+        </tr>
+      </table>
+      <% end %>  
 
-      
-    <table style="border:none;", :class="table" >    
-        <tr class="field">
+      <table class="table table-bordered">
+        <tr class="table-active">
           <th>郵便番号</th>
           <th>住所</th>
           <th>宛名</th>
-          <th></th>
+          <td></td>
         </tr>
-      <% @deliveries.each do |delivery| %> 
-        <tr class="field">
+        <% @deliveries.each do |delivery| %>
+        <tr>
           <td><%= delivery.postal_code   %></th>
           <td><%= delivery.address %></td>
           <td><%= delivery.name  %></td>
-          <td class="actions">
-            <%#= f.submit "編集内容を保存", :class =>'btn btn-success' %>
-            <%= link_to "編集する", edit_public_delivery_path(delivery), class:"btn btn-sm btn-success" %>
-            <%#= f.submit "編集内容を保存", :class =>'btn btn-success' %>
-            <%= link_to "削除する", public_delivery_path(delivery), method: :delete, class:"btn btn-sm btn-success" %>
-          </td>
+          <td><%= link_to '編集する', edit_delivery_path(delivery.id), class:"btn btn-success" %><%= link_to '削除する', delivery_path(delivery.id), method: :delete, class:"btn btn-danger ml-2" %></td>
         </tr>
-        
-      <% end %>
-                    
-      
-  </table>
-  
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>
+    
