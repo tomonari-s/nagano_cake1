@@ -7,9 +7,9 @@
   
   <div class ="row">
     <div class ="col-md-12">
+      <%= form_with model: @order, url: comfirm_path(current_customer.id), locale: true do |f| %>
       <div class ="mt-3">
       <h5 class ="font-weight-bold">支払方法</h5>
-      <%= form_with model: @order, url: comfirm_path(current_customer.id),locale: true do |f| %>
         <div class ="ml-5">  
           <ul class="list-unstyled">
             <li>
@@ -70,7 +70,7 @@
         </div>
 
       </div>
-    <% end %>
+    　<% end %>
     </div>
   </div>
   
