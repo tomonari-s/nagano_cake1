@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :customers
+  belongs_to :customer
   has_many :order_details
   
   

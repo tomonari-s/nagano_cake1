@@ -14,7 +14,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   
   namespace :admin do
-    resources :order_orders, only: [:update]
+    resources :order_details, only: [:update]
     resources :orders, only: [:show, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
