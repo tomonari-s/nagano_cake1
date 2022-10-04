@@ -13,7 +13,7 @@
         <tr>
           <th>購入者</th>
           <td>
-            <%= link_to @name, admin_customer_path(by_customer_orders: @name), method: :get, class:"text-body" %>
+            <%= link_to @name, admin_customer_path(@order.customer_id), method: :get, class:"text-body" %>
           </td>
         </tr>
         <tr>
